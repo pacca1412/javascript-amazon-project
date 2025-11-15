@@ -1,16 +1,16 @@
 // class is Object Generator
 class Cart {
   cartItems; // same as cartItem = undefined;
-  localStorageKey;
+  #localStorageKey; // to make it private, add #, can only be access inside the class
 
   constructor(localStorageKey) {
-    this.localStorageKey = localStorageKey;
-    this.loadFromStorage();
+    this.#localStorageKey = localStorageKey;
+    this.#loadFromStorage();
   }
 
   // loadFromStorage: function () -- below is shorthand method
-  loadFromStorage() {
-    this.cartItems = JSON.parse(localStorage.getItem(this.localStorageKey));
+  #loadFromStorage() {
+    this.cartItems = JSON.parse(localStorage.getItem(this.#localStorageKey));
 
     if (!this.cartItems) {
       this.cartItems = [{
@@ -27,7 +27,7 @@ class Cart {
 
   // Use function for a local storage
   saveToStorage() {
-    localStorage.setItem(this.localStorageKey, JSON.stringify(this.cartItems));
+    localStorage.setItem(this.#localStorageKey, JSON.stringify(this.cartItems));
   }
 
   // Add to cart
